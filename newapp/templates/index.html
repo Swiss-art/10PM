@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1f1c2c, #928dab);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #ffffff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background: #6a0572;
+            color: #ffffff;
+        }
+
+        tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover {
+            background: #ff4b5c;
+            color: #ffffff;
+        }
+
+        button {
+            background: #6a0572;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: #ff4b5c;
+            transform: translateY(-5px);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        #new3 {
+            display: inline-block;
+            margin-top: 20px;
+            background: #28a745;
+        }
+
+        #new3:hover {
+            background: #218838;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>CLIENT LISTS</h1>
+        <table id="customers">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Address</th>
+                    <th colspan="2" id="mid">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for x in mem %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ x.firstname }}</td>
+                    <td>{{ x.lastname }}</td>
+                    <td>{{ x.country }}</td>
+                    <td>
+                        <a href="update/{{ x.id }}"><button id="up">Update</button></a>
+                    </td>
+                    <td>
+                        <a href="delete/{{ x.id }}"><button id="del">Delete</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'add' %}"><button id="new3">Add Client</button></a>
+    </div>
+</body>
+
+</html>
